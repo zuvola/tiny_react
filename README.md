@@ -100,6 +100,15 @@ list
 ```
 
 
+If you want to watch multiple values, you can call `build` directly from a list.
+
+```dart
+final count1 = 0.notif;
+final count2 = 0.notif;
+[count1, count2].build((vals) => Text('$vals'));
+```
+
+
 ## tiny_locator
 
 [tiny_locator](https://pub.dartlang.org/packages/tiny_locator)

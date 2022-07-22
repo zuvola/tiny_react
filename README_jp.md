@@ -89,6 +89,15 @@ count.build((val) => Text('$val'));
 ```
 
 
+複数の値を監視する場合はリストから直接`build`を呼び出す事ができます。
+
+```dart
+final count1 = 0.notif;
+final count2 = 0.notif;
+[count1, count2].build((vals) => Text('$vals'));
+```
+
+
 `ValueNotifier`の値は変更されると自動で通知されますが、リストなどのコレクションの内容が変更された場合は通知されませんので、`CollectionNotifier`にある`notifyListeners`を自分で呼び出してください。
 
 ```dart

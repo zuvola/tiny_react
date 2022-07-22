@@ -62,3 +62,15 @@ extension MapValueNotifierExtension<T, E> on Map<T, E> {
   CollectionNotifier<Map<T, E>?> get nNotif =>
       CollectionNotifier<Map<T, E>?>(this);
 }
+
+extension IterableValueListenableBuilderExtension on List<ValueNotifier> {
+  /// Generates multiple [ValueListenableBuilders] corresponding to List<[ValueNotifier]>
+  Widget build(Widget Function(List vals) builder) => _build(builder, 0);
+
+  Widget _build(Widget Function(List vals) builder, int index) {
+    if (index >= length) return builder(map((item) => item.value).toList());
+    return elementAt(index).build((val) => _build(builder, ++index));
+  }
+
+  Widget call(Widget Function(List vals) builder) => build(builder);
+}

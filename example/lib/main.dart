@@ -4,6 +4,7 @@ import 'package:tiny_react/tiny_react.dart';
 
 class MyController {
   final num = 0.notif;
+  final flag = true.notif;
   final list = <int>[].notif;
 
   void doSomething() {
@@ -12,6 +13,9 @@ class MyController {
       list
         ..value.add(num.value)
         ..notifyListeners();
+    }
+    if (num.value % 3 == 0) {
+      flag.value = !flag.value;
     }
   }
 }
@@ -33,7 +37,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyPage extends StatelessWidget {
-  final controller = locator.get<MyController>();
+  final _app = locator.get<MyController>();
 
   MyPage({Key? key}) : super(key: key);
 
@@ -48,13 +52,16 @@ class MyPage extends StatelessWidget {
             const Text(
               'You have pushed the button this many times:',
             ),
-            controller.num.build((val) => Text('$val')),
-            controller.list.build((val) => Text('$val')),
+            _app.num.build((val) => Text('$val')),
+            _app.list.build((val) => Text('$val')),
+            _app.flag.build((val) => Text('$val')),
+            [_app.num, _app.flag]
+                .build((vals) => Text('${vals.first}/${vals.last}'))
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => controller.doSomething(),
+        onPressed: () => _app.doSomething(),
         child: const Icon(Icons.add),
       ),
     );
